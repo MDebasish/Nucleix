@@ -1,0 +1,123 @@
+---
+title: "Example"
+author: "Dr. Debasish Mukherjee"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Class
+
+
+```{r}
+# ================
+# Class definition
+# ================
+setClass("ParentClass")
+setClass("ClassName",
+          slots = list(
+            x = "numeric",
+            y = "character"
+          ),
+          contains = "ParentClass"
+)
+setClass("ClassName2",
+         slots = list(
+           x = "numeric",
+           y = "character",
+           z = "numeric"
+         ),
+         contains = "ParentClass"
+)
+```
+
+## Constructors
+
+
+```{r}
+# ===========
+# Constructor
+# ===========
+
+CNcreator <- function(x,y,...)
+  new("ClassName",x=x,y=y)
+```
+
+## Getters
+
+```{r}
+# ===========
+# Getters
+# ===========
+
+setGeneric("MethodName",
+            function(x, y, ...) standardGeneric("MethodName"))
+
+
+setMethod(f="MethodName",
+           signature = "ClassName",
+           definition = function(x, y, ...) {
+             return(paste0(x@x,x@y))
+           }
+)
+setMethod(
+  f="MethodName",
+  signature = "ClassName2",
+  definition = function(x, y, z, ...) {
+    return(paste0(x@x,x@y,x@z))
+    }
+)
+```
+
+## Show Methods
+
+```{r}
+# ===========
+# show method
+#============
+setMethod("show", "ClassName",
+           function(object)
+             cat(class(object), "instance with", length(object),
+                   "list and elements are", MethodName(object), "\n")
+           )
+
+```
+
+## Validity
+
+```{r}
+# ===============
+# validity method
+#================
+setValidity("ClassName",
+            function(object){
+              if (!is.integer(object@x) || !is.character(object@y)) {
+                return("first Slot should be Interger and seconf character\n")
+              }
+              slot_lengths <- c(length(slot(object,"x")),
+                                length(slot(object,"y")))
+              if (length(unique(slot_lengths)) != 1)
+                return("lengths of slots 'x', and 'y' differ")
+              TRUE
+            })
+
+```
+
+## Use
+
+```{r}
+aa <- CNcreator(1:10,LETTERS[1:10])
+
+bb <- new("ClassName2",x=c(1:10),y=c(LETTERS[1:10]), z=10:30)
+
+MethodName(aa)
+MethodName(bb)
+
+isS4(aa)
+```
+
+https://bioconductor.org/packages/devel/bioc/vignettes/S4Vectors/inst/doc/S4QuickOverview.pdf
+
