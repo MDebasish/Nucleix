@@ -461,6 +461,24 @@ MethodName(aa)</code></pre>
 ## [19] &quot;9I28&quot;  &quot;10J29&quot; &quot;1A30&quot;</code></pre>
 <pre class="r"><code>isS4(aa)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code># Class defination
+showClass(&quot;ClassName&quot;)</code></pre>
+<pre><code>## Class &quot;ClassName&quot; [in &quot;.GlobalEnv&quot;]
+## 
+## Slots:
+##                           
+## Name:          x         y
+## Class:   numeric character
+## 
+## Extends: &quot;ParentClass&quot;</code></pre>
+<pre class="r"><code># Show all the methods for the specified function(s) or class
+showMethods(MethodName)</code></pre>
+<pre><code>## Function: MethodName (package .GlobalEnv)
+## x=&quot;ClassName&quot;
+## x=&quot;ClassName2&quot;</code></pre>
+<pre class="r"><code># show associated generic methods with the class
+attr(methods(class=&quot;ClassName&quot;), &quot;info&quot;)$generic</code></pre>
+<pre><code>## [1] &quot;MethodName&quot; &quot;show&quot;</code></pre>
 <p><a href="https://bioconductor.org/packages/devel/bioc/vignettes/S4Vectors/inst/doc/S4QuickOverview.pdf" class="uri">https://bioconductor.org/packages/devel/bioc/vignettes/S4Vectors/inst/doc/S4QuickOverview.pdf</a></p>
 </div>
 

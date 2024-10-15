@@ -117,6 +117,15 @@ MethodName(aa)
 MethodName(bb)
 
 isS4(aa)
+
+# Class defination
+showClass("ClassName")
+
+# Show all the methods for the specified function(s) or class
+showMethods(MethodName)
+
+# show associated generic methods with the class
+attr(methods(class="ClassName"), "info")$generic
 ```
 
 
