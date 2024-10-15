@@ -1,0 +1,53 @@
+---
+title: "Plots"
+author: "Dr. Debasish Mukherjee"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+
+
+```{r }
+library(moments)
+library(DescTools)
+
+
+x<-iris$Petal.Length
+hist(x)
+abline(v=mean(x),col="blue", lwd=2)
+abline(v=median(x),col="red", lwd=2)
+abline(v=Mode(x),col="green", lwd=2)
+legend(x="topright",c("Mean","Median","Mode"),
+       col = c("blue","red","green"),lwd = c(2,2))
+skewness(x)
+#===============
+library(plotly)
+iris.ggplot <- ggplot(iris, aes(x=Sepal.Length, y=Sepal.Width,
+                                color=Species)) +
+  geom_point() +
+  guides(color=guide_legend(title="Flowers:"))
+ggplotly(iris.ggplot)
+#----------
+iris.ggplot <- ggplot(iris, aes(x=Sepal.Length, y=Sepal.Width,
+                                color=Species,
+                                size=Petal.Width)) +
+  geom_point()
+ggplotly(iris.ggplot)
+#----------
+plot_ly(iris, 
+        x=~Sepal.Length, 
+        y=~Petal.Width, 
+        z=~Sepal.Width) |> 
+  add_markers(color=~Sepal.Length, 
+              symbol=~Species,
+              symbols=~c(15,16,17)
+              )
+#----------
+```
+
