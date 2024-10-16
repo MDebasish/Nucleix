@@ -1,79 +1,13 @@
 ---
 title: "Learning S4 in R with Example"
 author: "Dr. Debasish Mukherjee"
-date: "`r Sys.Date()`"
-output: 
-  html_document: 
-    pandoc_args: ["--lua-filter=color-text.lua"]
-    toc: true
-    toc_float: true
-  pdf_document: 
-    pandoc_args: ["--lua-filter=color-text.lua"]
-    keep_tex: true
+format: html
+#  html:
+#    page-layout: custom
+editor: visual
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-```{cat, engine.opts = list(file = "color-text.lua")}
-Span = function(el)
-  color = el.attributes['color']
-  -- if no color attribute, return unchange
-  if color == nil then return el end
-  
-  -- transform to <span style="color: red;"></span>
-  if FORMAT:match 'html' then
-    -- remove color attributes
-    el.attributes['color'] = nil
-    -- use style attribute instead
-    el.attributes['style'] = 'color: ' .. color .. ';'
-    -- return full span element
-    return el
-  elseif FORMAT:match 'latex' then
-    -- remove color attributes
-    el.attributes['color'] = nil
-    -- encapsulate in latex code
-    table.insert(
-      el.content, 1,
-      pandoc.RawInline('latex', '\\textcolor{'..color..'}{')
-    )
-    table.insert(
-      el.content,
-      pandoc.RawInline('latex', '}')
-    )
-    -- returns only span content
-    return el.content
-  else
-    -- for other format return unchanged
-    return el
-  end
-end
-```
-
----
-
-```{=html}
-<script>
-$(document).ready(function(){
-  $('span:nth-child(2n-1)').css("color",function(i,col) {
-    $("blockquote").eq(i).css({"border-left":" 5px solid " + col,
-                               "font-style":"italic",
-                               "background-color": "#f5f5f5"});
-  });
-});
-</script>
-
-<style>
-.nav-pills>li:nth-child {
-    background: green;
- }
- </style>
-```
-
-
-# Introduction {.tabset .tabset-fade .tabset-pills}
-
+# Introduction
 ---
 
 To work with OOP in `R` and specially with `S4` we need to follow some guidelines.
@@ -82,32 +16,44 @@ to get going. I have prepared this solely for my won understanding. Any suggesti
 for modification or inclusion will be highly appreciated. 
 
 
-
+::: {.panel-tabset}
 ## Help
 
 This is the format used throughout this documents for helpful comments:
 
+```{mermaid}
+flowchart LR
+  A[Hard edge] --> B(Round edge)
+  B --> C{Decision}
+  C --> D[Result one]
+  C --> E[Result two]
+```
 
 
-> [&#128466; ***Source***]{color="#89CFF0"}  
-> (https://www.compart.com/en/unicode/) 
+::: {.callout-note} 
+Useful information that users should know, even when skimming content..
+:::
 
+::: {.callout-tip}
+Helpful advice for doing things better or more easily
+:::
 
-> [&#128712; **Note !**]{color="#0096FF"}  
-> Useful information that users should know, even when skimming content..
+::: {.callout-caution}
+Advises about risks or negative outcomes of certain actions.
+:::
 
+::: {.callout-warning}
+Urgent info that needs immediate user attention to avoid problems.
+:::
 
-> [&#128161; **Tip !**]{color="#228B22"}  
-> Helpful advice for doing things better or more easily
-    
-> [&#128492; **Important !**]{color="#7F00FF"}  
-> Key information users need to know to achieve their goal. 
+::: {.callout-important}
+Key information users need to know to achieve their goal.
+:::
 
-> [&#9888; **Warning !**]{color="#E49B0F"}  
-> Urgent info that needs immediate user attention to avoid problems. 
+::: {.callout-tip title="Tip with Title"  collapse="true"}
+This is a callout with a title.This is an example of a 'folded' tip callout that can be expanded by the user. You can use `collapse="true"` to collapse it by default or `collapse="false"` to make a collapsible callout that is expanded by default. 
+:::
 
-> [&#10060; **Caution !**]{color="#DC143C"}  
-> Advises about risks or negative outcomes of certain actions.
 
 ## R Class
 ```{r}
@@ -225,12 +171,9 @@ showMethods(MethodName)
 # show associated generic methods with the class
 attr(methods(class="ClassName"), "info")$generic
 ```
-
-
-
+:::
 
 # References
-
 ---
 - https://bioconductor.org/packages/devel/bioc/vignettes/S4Vectors/inst/doc/S4QuickOverview.pdf
 - https://www.bioconductor.org/help/course-materials/2017/Zurich/S4-classes-and-methods.html
