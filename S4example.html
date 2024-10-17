@@ -1549,13 +1549,13 @@ Advises about risks or negative outcomes of certain actions.</p>
 <pre class="r"><code># ================
 # Class definition
 # ================
-setClass(&quot;ParentClass&quot;)
+setClass(&quot;ParentClass1&quot;)
 setClass(&quot;ClassName&quot;,
           slots = list(
             x = &quot;numeric&quot;,
             y = &quot;character&quot;
           ),
-          contains = &quot;ParentClass&quot;
+          contains = &quot;ParentClass1&quot;
 )
 setClass(&quot;ClassName2&quot;,
          slots = list(
@@ -1563,7 +1563,7 @@ setClass(&quot;ClassName2&quot;,
            y = &quot;character&quot;,
            z = &quot;numeric&quot;
          ),
-         contains = &quot;ParentClass&quot;
+         contains = &quot;ParentClass1&quot;
 )</code></pre>
 </div>
 <div id="constructors" class="section level2">
@@ -1632,7 +1632,7 @@ setValidity(&quot;ClassName&quot;,
 ## Name:          x         y
 ## Class:   numeric character
 ## 
-## Extends: &quot;ParentClass&quot;</code></pre>
+## Extends: &quot;ParentClass1&quot;</code></pre>
 </div>
 <div id="use" class="section level2">
 <h2>Use</h2>
@@ -1657,7 +1657,7 @@ showClass(&quot;ClassName&quot;)</code></pre>
 ## Name:          x         y
 ## Class:   numeric character
 ## 
-## Extends: &quot;ParentClass&quot;</code></pre>
+## Extends: &quot;ParentClass1&quot;</code></pre>
 <pre class="r"><code># Show all the methods for the specified function(s) or class
 showMethods(MethodName)</code></pre>
 <pre><code>## Function: MethodName (package .GlobalEnv)

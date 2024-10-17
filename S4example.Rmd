@@ -114,13 +114,13 @@ This is the format used throughout this documents for helpful comments:
 # ================
 # Class definition
 # ================
-setClass("ParentClass")
+setClass("ParentClass1")
 setClass("ClassName",
           slots = list(
             x = "numeric",
             y = "character"
           ),
-          contains = "ParentClass"
+          contains = "ParentClass1"
 )
 setClass("ClassName2",
          slots = list(
@@ -128,7 +128,7 @@ setClass("ClassName2",
            y = "character",
            z = "numeric"
          ),
-         contains = "ParentClass"
+         contains = "ParentClass1"
 )
 ```
 
